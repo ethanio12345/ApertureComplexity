@@ -82,8 +82,8 @@ class PyComplexityMetric(ComplexityMetric):
         values = []
         for k, beam in plan["beams"].items():
             # check if treatment beam
-            if beam["TreatmentDeliveryType"] == "TREATMENT":
-                if beam["MU"] > 0.0:
+            if beam.get("TreatmentDeliveryType") == "TREATMENT":
+                if "MU" in beam and beam["MU"] > 0.0:
                     v = self.CalculateForBeam(patient, plan, beam)
                     values.append(v)
 
