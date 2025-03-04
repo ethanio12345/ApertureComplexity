@@ -1,0 +1,64 @@
+INFO:root:Logistic Regression accuracy: 0.9328
+INFO:root:Random Forest accuracy: 0.9160
+INFO:root:XGBoost accuracy: 0.8992
+INFO:root:Confusion Matrix:
+[[108   2]
+ [  8   1]]
+INFO:root:Classification Report:
+              precision    recall  f1-score   support
+
+         0.0       0.93      0.98      0.96       110
+         1.0       0.33      0.11      0.17         9
+
+    accuracy                           0.92       119
+   macro avg       0.63      0.55      0.56       119
+weighted avg       0.89      0.92      0.90       119
+
+INFO:root:Feature Importances:
+                      Feature  Importance
+0          PyComplexityMetric    0.299144
+2         AreaMetricEstimator    0.254797
+1     MeanAreaMetricEstimator    0.247489
+3  ApertureIrregularityMetric    0.198570
+INFO:root:Threshold 0.1: Recall 0.6667, Precision 0.2400
+INFO:root:Threshold 0.2: Recall 0.5556, Precision 0.3125
+INFO:root:Threshold 0.3: Recall 0.4444, Precision 0.4000
+INFO:root:Threshold 0.4: Recall 0.4444, Precision 0.4444
+INFO:root:Threshold 0.5: Recall 0.1111, Precision 0.3333
+INFO:root:Threshold 0.6: Recall 0.1111, Precision 0.5000
+INFO:root:Threshold 0.7: Recall 0.1111, Precision 0.5000
+INFO:root:Threshold 0.8: Recall 0.0000, Precision 0.0000
+INFO:root:
+PyComplexityMetric:
+INFO:root:  Accuracy: 0.8992
+INFO:root:  Recall (class 1): 0.4444
+INFO:root:  Precision (class 1): 0.3636
+INFO:root:  F1 (class 1): 0.4000
+INFO:root:  Best threshold: 0.1
+INFO:root:  Best F1 with threshold: 0.4444
+INFO:root:
+MeanAreaMetricEstimator:
+INFO:root:  Accuracy: 0.8571
+INFO:root:  Recall (class 1): 0.1111
+INFO:root:  Precision (class 1): 0.1000
+INFO:root:  F1 (class 1): 0.1053
+INFO:root:  Best threshold: 0.2
+INFO:root:  Best F1 with threshold: 0.2143
+INFO:root:
+AreaMetricEstimator:
+INFO:root:  Accuracy: 0.8655
+INFO:root:  Recall (class 1): 0.1111
+INFO:root:  Precision (class 1): 0.1111
+INFO:root:  F1 (class 1): 0.1111
+INFO:root:  Best threshold: 0.1
+INFO:root:  Best F1 with threshold: 0.3200
+INFO:root:
+ApertureIrregularityMetric:
+INFO:root:  Accuracy: 0.8655
+INFO:root:  Recall (class 1): 0.2222
+INFO:root:  Precision (class 1): 0.1818
+INFO:root:  F1 (class 1): 0.2000
+INFO:root:  Best threshold: 0.6
+INFO:root:  Best F1 with threshold: 0.2353
+INFO:root:For PyComplexityMetric, use a cutoff of 0.1345
+INFO:root:When PyComplexityMetric >= 0.1345, predict Pass Rate < 95
