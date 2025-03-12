@@ -7,6 +7,7 @@ from complexity.PyComplexityMetric import (
     AreaMetricEstimator,
     ApertureIrregularityMetric,
 )
+from complexity.misc import ModulationComplexityScore
 from complexity.dicomrt import RTPlan
 
 if __name__ == "__main__":
@@ -27,39 +28,52 @@ if __name__ == "__main__":
 
     file_name = os.path.join(base_path, f"plan_complexity_summary.csv")
 
+    import logging
+
+    logging.basicConfig(filename='errors.log', level=logging.ERROR)
+
     with open(file_name, "w") as f:
         # write header
         metrics_list = [
-            #ModulationIndexScore,
             PyComplexityMetric,
             MeanAreaMetricEstimator,
             AreaMetricEstimator,
             ApertureIrregularityMetric,
+            ModulationComplexityScore
         ]
-        units = ["CI [mm^-1]", "mm^2", "mm^2", "dimensionless"]
+        units = ["CI [mm^-1]", "mm^2", "mm^2", "dimensionless", "unknown units"]
         header = "plan, parent, AUID, Course ID, SOP Instance UID, " + ", ".join([f"{m.__name__} ({u})" for m, u in zip(metrics_list, units)])
         f.write(header + "\n")
 
         # write results
         for path_to_rtplan_file in tqdm(rp_files):
-            # Getting planning data from DICOM file.
-            plan_info = RTPlan(filename=path_to_rtplan_file)
-            plan_dict = plan_info.get_plan()
-            study_info = plan_info.ds.StudyID
-            sop_instance_uid = plan_info.ds.SOPInstanceUID
+            try:
+                # Getting planning data from DICOM file.
+                plan_info = RTPlan(filename=path_to_rtplan_file)
+                plan_dict = plan_info.get_plan()
+                study_info = plan_info.ds.StudyID
+                sop_instance_uid = plan_info.ds.SOPInstanceUID
 
-            row = [
-                path_to_rtplan_file.stem,
-                path_to_rtplan_file.parent.parent.name,
-                str(int(path_to_rtplan_file.parent.parent.name[:10])) if path_to_rtplan_file.parent.parent.name[:10].isdigit() else
-                str(int(path_to_rtplan_file.parent.parent.name[-10:])) if path_to_rtplan_file.parent.parent.name[-10:].isdigit() else "N/A",
-                study_info,
-                sop_instance_uid
-            ]
+                row = [
+                    path_to_rtplan_file.stem,
+                    path_to_rtplan_file.parent.parent.name,
+                    str(int(path_to_rtplan_file.parent.parent.name[:10])) if path_to_rtplan_file.parent.parent.name[:10].isdigit() else
+                    str(int(path_to_rtplan_file.parent.parent.name[-10:])) if path_to_rtplan_file.parent.parent.name[-10:].isdigit() else "N/A",
+                    study_info,
+                    sop_instance_uid
+                ]
 
-            # compute per plan
-            for cc in metrics_list:
-                cc_obj = cc()
-                plan_metric = cc_obj.CalculateForPlan(None, plan_dict)
-                row.append(str(plan_metric))
-            f.write(", ".join(row) + "\n")
+                # compute per plan
+                for cc in metrics_list:
+                    try:
+                        cc_obj = cc()
+                        plan_metric = cc_obj.CalculateForPlan(None, plan_dict)
+                        row.append(str(plan_metric))
+                    except Exception as e:
+                        logging.error(f"Error calculating {cc.__name__} for {path_to_rtplan_file}: {e}")
+                        row.append("N/A")
+                
+                f.write(", ".join(row) + "\n")
+
+            except Exception as e:
+                logging.error(f"Error processing {path_to_rtplan_file}: {e}")

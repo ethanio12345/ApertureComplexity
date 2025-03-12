@@ -82,7 +82,6 @@ class ModulationComplexityScore(PyComplexityMetric):
 
         return [metric.Calculate(aperture, aav_norm) for aperture in apertures]
 
-
 class ModulationIndexScore(PyComplexityMetric):
 
     def CalculateForPlan(self, patient=None, plan=None, k=0.02):

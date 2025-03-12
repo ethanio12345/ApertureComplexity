@@ -30,17 +30,24 @@ def main(archcheck_file, pcm_summary_file):
     
     columns_to_extract = ['Plan Name', 'plan', 'MRN', ' Course ID', 'Clinical Site', ' parent', 
                           ' PyComplexityMetric (CI [mm^-1])', ' MeanAreaMetricEstimator (mm^2)',
-                          ' AreaMetricEstimator (mm^2)', ' ApertureIrregularityMetric (dimensionless)', 'Pass Rate']
+                          ' AreaMetricEstimator (mm^2)', ' ApertureIrregularityMetric (dimensionless)',' ModulationComplexityScore (unknown units)', 'Pass Rate']
     
     extracted_df = merged_df[columns_to_extract]
 
     columns_to_write = ['Plan Name', 'Plan File', 'MRN', 'Course ID', 'Clinical Site', 'Parent Folder', 
                           'PyComplexityMetric', 'MeanAreaMetricEstimator',
-                          'AreaMetricEstimator', 'ApertureIrregularityMetric', 'Pass Rate']
+                          'AreaMetricEstimator', 'ApertureIrregularityMetric', 'ModulationComplexityScore', 'Pass Rate']
     extracted_df.columns = columns_to_write
     extracted_df = extracted_df[~extracted_df['Pass Rate'].isna()]
+    extracted_df = extracted_df.replace(' N/A', pd.NA).dropna()
+
+    
+    extracted_df = extracted_df.drop_duplicates()
     # Save the merged DataFrame to a new file
-    extracted_df.to_csv('matched_rows_arccheck.csv', index=False)
+    extracted_df.to_csv('matched_rows_arccheck_deduped.csv', index=False)
+    extracted_df = extracted_df.drop_duplicates(subset='MRN', keep="last")
+    extracted_df.to_csv('matched_rows_arccheck_deduped_keep_last.csv', index=False)
+
  
 if __name__ == "__main__":
     main("BCHC - ArcCheck Results Summary_cleaned.xlsx", 

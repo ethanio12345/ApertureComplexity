@@ -2,12 +2,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
-df = pd.read_csv('matched_rows_arccheck.csv')
-
+df = pd.read_csv('matched_rows_arccheck_deduped_keep_last.csv')
 # Only select where pass rate < 95
 # df = df[df['Pass Rate']<95]
 
-y_metrics = ['PyComplexityMetric', 'MeanAreaMetricEstimator', 'AreaMetricEstimator', 'ApertureIrregularityMetric']
+y_metrics = ['PyComplexityMetric', 'MeanAreaMetricEstimator', 'AreaMetricEstimator', 'ApertureIrregularityMetric', 'ModulationComplexityScore']
 df[y_metrics + ['Pass Rate']] = df[y_metrics + ['Pass Rate']].astype(float)
 
 os.makedirs("plots", exist_ok=True)

@@ -18,9 +18,8 @@ logging.basicConfig(filename='ml_classification.log', level=logging.INFO,filemod
 
 #####################################################
 
-df = pd.read_csv('matched_rows_arccheck.csv')
-# df = pd.read_excel('matched_rows_d4.xlsx')
-
+df = pd.read_csv('matched_rows_arccheck - cleaned_backup.csv')
+# df = pd.read_csv("matched_rows_arccheck_deduped_keep_last.csv")
 
 # Assuming your dataframe is called 'df'
 # Create the binary target variable
@@ -30,7 +29,7 @@ df = df.replace({" nan": np.nan}).dropna()
 
 # Define features and target
 features = ['PyComplexityMetric', 'MeanAreaMetricEstimator', 
-            'AreaMetricEstimator', 'ApertureIrregularityMetric']
+            'AreaMetricEstimator', 'ApertureIrregularityMetric']#, 'ModulationComplexityScore']
 X = df[features].dropna()
 y = df['Target']
 
@@ -40,7 +39,7 @@ y = y.astype(float)
 
 
 # Split the data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=12)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 #####################################################
 
@@ -111,7 +110,23 @@ for threshold in thresholds:
     logging.info(f"Threshold {threshold:.1f}: Recall {recall:.4f}, Precision {precision:.4f}")
 
 
+# Plot ROC curve for best model
+from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt
 
+fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
+roc_auc = auc(fpr, tpr)
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic example')
+plt.legend(loc="lower right")
+plt.savefig('plots/best_model_roc_curve.png')
+plt.close()
 
 #####################################################
 
@@ -124,7 +139,7 @@ for feature in features:
     
     # Split the data
     X_train_single, X_test_single, y_train_single, y_test_single = train_test_split(
-        X_single, y, test_size=0.2, random_state=12
+        X_single, y, test_size=0.2, random_state=42
     )
     
     # Scale for logistic regression
@@ -166,6 +181,21 @@ for feature in features:
     single_feature_results[feature]['best_threshold'] = best_threshold
     single_feature_results[feature]['best_f1'] = best_f1
 
+    # Plot ROC curve
+    fpr, tpr, _ = roc_curve(y_test_single, y_pred_proba_single)
+    roc_auc = auc(fpr, tpr)
+    plt.figure()
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title(f'{feature} ROC Curve')
+    plt.legend(loc="lower right")
+    plt.savefig(f'plots/{feature}_roc_curve.png')
+    plt.close()
+
 # Display results
 for feature, results in single_feature_results.items():
     print(f"\n{feature}:")
@@ -200,3 +230,9 @@ print(f"For {best_feature}, use a cutoff of {optimal_cutoff:.4f}")
 logging.info(f"For {best_feature}, use a cutoff of {optimal_cutoff:.4f}")
 print(f"When {best_feature} >= {optimal_cutoff:.4f}, predict Pass Rate < 95")
 logging.info(f"When {best_feature} >= {optimal_cutoff:.4f}, predict Pass Rate < 95")
+
+
+# Plot ROC curves
+from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt
+
