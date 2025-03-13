@@ -1,3 +1,11 @@
+Training all models...
+Training Logistic Regression model...
+Logistic Regression trained successfully. Recall: 0.7778
+Training Random Forest model...
+Random Forest trained successfully. Recall: 0.4444
+Training XGBoost model...
+XGBoost trained successfully. Recall: 0.3333
+Best model: Logistic Regression with score: 0.7778
 
 ==== MODEL TRAINING RESULTS ====
 
@@ -91,6 +99,11 @@ Threshold 0.80: Recall 0.7778, Precision 0.0625, F1 0.1157
 Threshold 0.85: Recall 0.8889, Precision 0.0696, F1 0.1290
 Threshold 0.90: Recall 1.0000, Precision 0.0769, F1 0.1429
 Best threshold for recall: 0.90 (recall = 1.0000)
+Saving models to models\20250313_163556...
+Saved Logistic Regression with optimized threshold: 0.9000
+Saved Random Forest with optimized threshold: 0.7000
+Saved XGBoost with optimized threshold: 0.8000
+Saved model metadata to models\20250313_163556\metadata.json
 
 ==== INDIVIDUAL FEATURE EVALUATION ====
 
@@ -100,41 +113,41 @@ Best threshold for recall: 0.90 (recall = 1.0000)
 
 PyComplexityMetric:
   Accuracy: 0.6975
-  Recall (Failure Class): 0.7778
-  Precision (Failure Class): 0.1707
-  F1 (Failure Class): 0.2800
+  Recall (Failure Class): 0.2222
+  Precision (Failure Class): 0.0256
+  F1 (Failure Class): 0.0460
   AUC: 0.7404
-  Best threshold (F1): 0.75 (F1 = 0.1440)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.75 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.6005
 
 MeanAreaMetricEstimator:
   Accuracy: 0.6387
-  Recall (Failure Class): 0.7778
-  Precision (Failure Class): 0.1458
-  F1 (Failure Class): 0.2456
+  Recall (Failure Class): 0.2222
+  Precision (Failure Class): 0.0282
+  F1 (Failure Class): 0.0500
   AUC: 0.7343
-  Best threshold (F1): 0.20 (F1 = 0.1538)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.80 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.6178
 
 AreaMetricEstimator:
   Accuracy: 0.6218
-  Recall (Failure Class): 0.7778
-  Precision (Failure Class): 0.1400
-  F1 (Failure Class): 0.2373
+  Recall (Failure Class): 0.2222
+  Precision (Failure Class): 0.0290
+  F1 (Failure Class): 0.0513
   AUC: 0.6980
-  Best threshold (F1): 0.20 (F1 = 0.2353)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.70 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.6286
 
 ApertureIrregularityMetric:
   Accuracy: 0.3697
-  Recall (Failure Class): 0.4444
-  Precision (Failure Class): 0.0541
-  F1 (Failure Class): 0.0964
+  Recall (Failure Class): 0.5556
+  Precision (Failure Class): 0.1111
+  F1 (Failure Class): 0.1852
   AUC: 0.4444
-  Best threshold (F1): 0.50 (F1 = 0.1852)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.60 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.4833
 
@@ -142,41 +155,41 @@ ApertureIrregularityMetric:
 
 PyComplexityMetric:
   Accuracy: 0.8655
-  Recall (Failure Class): 0.4444
-  Precision (Failure Class): 0.2667
-  F1 (Failure Class): 0.3333
+  Recall (Failure Class): 0.5556
+  Precision (Failure Class): 0.0481
+  F1 (Failure Class): 0.0885
   AUC: 0.8010
-  Best threshold (F1): 0.90 (F1 = 0.1417)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.90 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.2400
 
 MeanAreaMetricEstimator:
   Accuracy: 0.8739
-  Recall (Failure Class): 0.4444
-  Precision (Failure Class): 0.2857
-  F1 (Failure Class): 0.3478
+  Recall (Failure Class): 0.5556
+  Precision (Failure Class): 0.0476
+  F1 (Failure Class): 0.0877
   AUC: 0.7182
-  Best threshold (F1): 0.75 (F1 = 0.1417)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.75 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.5900
 
 AreaMetricEstimator:
   Accuracy: 0.8824
-  Recall (Failure Class): 0.4444
-  Precision (Failure Class): 0.3077
-  F1 (Failure Class): 0.3636
+  Recall (Failure Class): 0.5556
+  Precision (Failure Class): 0.0472
+  F1 (Failure Class): 0.0870
   AUC: 0.8874
-  Best threshold (F1): 0.65 (F1 = 0.1452)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.65 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.0179
 
 ApertureIrregularityMetric:
   Accuracy: 0.8655
-  Recall (Failure Class): 0.4444
-  Precision (Failure Class): 0.2667
-  F1 (Failure Class): 0.3333
+  Recall (Failure Class): 0.5556
+  Precision (Failure Class): 0.0481
+  F1 (Failure Class): 0.0885
   AUC: 0.6500
-  Best threshold (F1): 0.85 (F1 = 0.1406)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.85 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.5900
 
@@ -184,49 +197,49 @@ ApertureIrregularityMetric:
 
 PyComplexityMetric:
   Accuracy: 0.9244
-  Recall (Failure Class): 0.1111
-  Precision (Failure Class): 0.5000
-  F1 (Failure Class): 0.1818
+  Recall (Failure Class): 0.8889
+  Precision (Failure Class): 0.0684
+  F1 (Failure Class): 0.1270
   AUC: 0.8894
-  Best threshold (F1): 0.70 (F1 = 0.1417)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.70 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.0527
 
 MeanAreaMetricEstimator:
   Accuracy: 0.9160
-  Recall (Failure Class): 0.0000
-  Precision (Failure Class): 0.0000
-  F1 (Failure Class): 0.0000
+  Recall (Failure Class): 1.0000
+  Precision (Failure Class): 0.0763
+  F1 (Failure Class): 0.1417
   AUC: 0.7359
-  Best threshold (F1): 0.45 (F1 = 0.1429)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.45 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.0242
 
 AreaMetricEstimator:
   Accuracy: 0.8824
-  Recall (Failure Class): 0.0000
-  Precision (Failure Class): 0.0000
-  F1 (Failure Class): 0.0000
+  Recall (Failure Class): 1.0000
+  Precision (Failure Class): 0.0789
+  F1 (Failure Class): 0.1463
   AUC: 0.8051
-  Best threshold (F1): 0.30 (F1 = 0.1513)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.30 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.0304
 
 ApertureIrregularityMetric:
   Accuracy: 0.8992
-  Recall (Failure Class): 0.1111
-  Precision (Failure Class): 0.2000
-  F1 (Failure Class): 0.1429
+  Recall (Failure Class): 0.8889
+  Precision (Failure Class): 0.0702
+  F1 (Failure Class): 0.1301
   AUC: 0.6318
-  Best threshold (F1): 0.75 (F1 = 0.1406)
+  Best threshold (F1): 0.50 (F1 = -1.0000)
   Best threshold (Recall): 0.75 (Recall = 1.0000)
   Optimal cutoff from ROC: 0.3226
 
 === Best Feature for Failure Detection (recall_class_0) ===
-Feature: PyComplexityMetric
-Model: LogisticRegression
-Score: 0.7778
-For PyComplexityMetric, optimal cutoff: 0.6005
-Rule: When PyComplexityMetric >= 0.6005, likely to predict failure (Pass Rate < 95)
+Feature: MeanAreaMetricEstimator
+Model: XGBClassifier
+Score: 1.0000
+For MeanAreaMetricEstimator, optimal cutoff: 0.0242
+Rule: When MeanAreaMetricEstimator >= 0.0242, likely to predict failure (Pass Rate < 95)
 
 Analysis complete.
