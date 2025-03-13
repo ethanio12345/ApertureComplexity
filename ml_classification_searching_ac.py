@@ -1,16 +1,20 @@
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, precision_score, recall_score, f1_score, roc_curve, auc
 import logging
+import os
+import pickle
+import warnings
+
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import xgboost as xgb
 from sklearn.base import clone
-import pickle, os
-import warnings
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (auc, classification_report, confusion_matrix,
+                            f1_score, precision_score, recall_score, roc_curve)
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
 warnings.filterwarnings('ignore')
 
 class Classifier:
