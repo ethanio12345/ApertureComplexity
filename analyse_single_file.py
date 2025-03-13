@@ -13,7 +13,7 @@ from complexity.dicomrt import RTPlan
 if __name__ == "__main__":
     # Path to DICOM RTPLAN file - IMRT/VMAT
     # pfile = "RP.dcm"
-    path_to_rtplan_file = r"v:\01 Physics Clinical QA\06 Patient QA\ArcCHECK\Ekubagiorgis^Mereb~1000576912\ArcCHECK\testing\1000576912\RP.1000576912.L Br SAI VmBH.dcm"
+    path_to_rtplan_file = r"v:\01 Physics Clinical QA\06 Patient QA\ArcCHECK\Lockeridge^Julie^A^MRS~1000639650\ArcCHECK\RT_Plan_(1.2.246.352.71.5.76690441797.3367783.20250313100934).dcm"
 
     # Getting planning data from DICOM file.
     plan_info = RTPlan(filename=path_to_rtplan_file)
@@ -36,9 +36,9 @@ if __name__ == "__main__":
         plan_metric = cc_obj.CalculateForPlan(None, plan_dict)
         print(f"{cc.__name__} Plan Metric - {plan_metric} {unit}")
 
-        for k, beam in plan_dict["beams"].items():
+        # for k, beam in plan_dict["beams"].items():
             # skip setup fields
-            if beam["TreatmentDeliveryType"] == "TREATMENT" and beam["MU"] > 0:
+            # if beam["TreatmentDeliveryType"] == "TREATMENT" and beam["MU"] > 0:
                 # fig = plt.figure(figsize=(6, 6))
                 # # create a subplot
                 # ax = fig.add_subplot(111)
@@ -52,6 +52,6 @@ if __name__ == "__main__":
                 # txt = f"Output - Beam name: {beam['BeamName']} - {cc.__name__}"
                 # ax.set_title(txt)
                 # plt.show()
-
-                beam_metric = cc_obj.CalculateForBeam(None, plan_dict, beam)
-                print(f"{cc.__name__} Beam Metric - {beam_metric} {unit} - Field Name: {beam['BeamName']}")
+                
+                # beam_metric = cc_obj.CalculateForBeam(None, plan_dict, beam)
+                # print(f"{cc.__name__} Beam Metric - {beam_metric} {unit} - Field Name: {beam['BeamName']}")
