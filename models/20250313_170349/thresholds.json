@@ -1,0 +1,17 @@
+{
+  "Logistic Regression": {
+    "best_threshold": 0.9,
+    "best_value": 1.0,
+    "focus_metric": "recall"
+  },
+  "Random Forest": {
+    "best_threshold": 0.7000000000000001,
+    "best_value": 1.0,
+    "focus_metric": "recall"
+  },
+  "XGBoost": {
+    "best_threshold": 0.8,
+    "best_value": 1.0,
+    "focus_metric": "recall"
+  }
+}

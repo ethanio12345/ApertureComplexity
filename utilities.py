@@ -42,7 +42,7 @@ def optimize_threshold(y_true: np.ndarray,
         Dictionary containing threshold evaluation results
     """
     results = []
-    thresholds = np.arange(0.1, 0.95, step)
+    thresholds = np.arange(0, 1, step)
     
     # Define best metric tracker based on focus
     best_value = -1

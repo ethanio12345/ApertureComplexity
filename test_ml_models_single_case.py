@@ -1,10 +1,10 @@
-import pickle
+import joblib
 
 # Load the saved models
 
 model_name = "XGBoost"
-with open(f'models/{model_name}.pkl', 'rb') as f:
-    model = pickle.load(f)
+datestamp = "20250313_165707"
+model = joblib.load(f'models/{datestamp}/{model_name}.joblib')
 
 # Define your test case
 test_case_pass = {
@@ -16,14 +16,14 @@ test_case_pass = {
 
 
 test_case_fail = {
-    'PyComplexityMetric': 0.043228985,
-    'MeanAreaMetricEstimator': 197.7077636,
-    'AreaMetricEstimator': 9445.26388,
-    'ApertureIrregularityMetric': 1.233084609
+    'PyComplexityMetric': 0.165618745,
+    'MeanAreaMetricEstimator': 68.2977662,
+    'AreaMetricEstimator': 452.9782629,
+    'ApertureIrregularityMetric': 0.906965435
 }
 # Convert the test case to a Pandas DataFrame
 import pandas as pd
-test_df = pd.DataFrame([test_case_pass])
+test_df = pd.DataFrame([test_case_fail])
 
 # Make predictions using specified model
 

@@ -1,0 +1,15 @@
+{
+  "features": [
+    "PyComplexityMetric",
+    "MeanAreaMetricEstimator",
+    "AreaMetricEstimator",
+    "ApertureIrregularityMetric"
+  ],
+  "failure_class": 0,
+  "requires_scaling": {
+    "Logistic Regression": true,
+    "Random Forest": false,
+    "XGBoost": false
+  },
+  "best_model": "Logistic Regression"
+}

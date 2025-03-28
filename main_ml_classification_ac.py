@@ -1,17 +1,8 @@
 import logging
 
-from typing import Any, Dict, List, Optional, Tuple, Union
-
 import numpy as np
 import pandas as pd
-import xgboost as xgb
-import yaml
-from sklearn.base import clone
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import (
-    precision_score, recall_score
-)
+
 from sklearn.model_selection import train_test_split
 
 from classifier_arccheck import Classifier
@@ -54,7 +45,12 @@ def main():
 
     # Train all models
     models = classifier.train_all_models()
-    
+    # Optimize threshold for each model
+    for model_name, model_info in models.items():
+        threshold_results = classifier.optimize_threshold_for_model(model_name, focus_metric='recall')
+        models[model_name]['best_threshold'] = threshold_results['best_threshold']
+
+    # Print model training results
     logger.info("\n==== MODEL TRAINING RESULTS ====")
     
     # Print model results
@@ -63,8 +59,11 @@ def main():
         y_pred = model_info['model'].predict(X_eval)
         y_pred_proba = model_info['model'].predict_proba(X_eval)[:, classifier.failure_class]
         
+        # Use the optimized threshold for prediction
+        y_pred_optimized = (y_pred_proba >= model_info['best_threshold']).astype(int)
+    
         result_printer.print_model_results(
-            name, classifier.y_test, y_pred, model_info['score'], classifier.failure_class
+            name, classifier.y_test, y_pred_optimized, model_info['score'], classifier.failure_class
         )
         visualizer.plot_roc_curve(classifier.y_test, y_pred_proba, name, failure_class=classifier.failure_class, save=True)
         
@@ -77,10 +76,9 @@ def main():
     
     # Optimize threshold for best model
     logger.info("\n==== THRESHOLD OPTIMIZATION ====")
-    if classifier.best_model:
-        best_model_name = classifier.best_model['name']
+    for name, model_info in models.items():
         # Specify focus metric explicitly for consistency
-        threshold_results = classifier.optimize_threshold_for_model(best_model_name, focus_metric='recall')
+        threshold_results = classifier.optimize_threshold_for_model(name, focus_metric='recall')
         result_printer.print_threshold_results(
             threshold_results['threshold_results'],
             threshold_results['best_threshold'],
@@ -91,86 +89,13 @@ def main():
             threshold_results['threshold_results'], 
             best_threshold=threshold_results['best_threshold'],
             focus_metric=threshold_results['focus_metric'],
-            title_suffix=best_model_name
+            title_suffix=name
         )
     
         # Save all models
         classifier.save_models()
 
-    # SECTION: EVALUATE INDIVIDUAL FEATURES WITH MULTIPLE MODELS
-    logger.info("\n==== INDIVIDUAL FEATURE EVALUATION ====")
-    
-    # Define models to test with
-    models_to_evaluate = [
-        LogisticRegression(class_weight='balanced', max_iter=1000, random_state=42),
-        RandomForestClassifier(n_estimators=100, class_weight='balanced', random_state=42),
-        xgb.XGBClassifier(random_state=42)
-    ]
-    
-    # Define which models require scaling
-    models_require_scaling = {
-        'LogisticRegression': True,
-        'RandomForestClassifier': False,
-        'XGBClassifier': False
-    }
-    
-    # Evaluate features with multiple models
-    multi_model_results = feature_evaluator.evaluate_features_with_multiple_models(
-        models_to_evaluate, models_require_scaling
-    )
-    
-    # Print results for each model and feature
-    print("\n==== Feature Evaluation Across Multiple Models ====")
-    logger.info("\n==== FEATURE EVALUATION ACROSS MULTIPLE MODELS ====")
-    for model_name, feature_results in multi_model_results.items():
-        print(f"\n--- Model: {model_name} ---")
-        logger.info(f"\n--- Model: {model_name} ---")
-        result_printer.print_feature_results(feature_results, failure_class=feature_evaluator.failure_class)
-        
-        for feature, results in feature_results.items():
-            # Plot ROC curve for this model/feature combination
-            visualizer.plot_feature_roc_curve(
-                feature, 
-                results['roc_data'],
-                model_name=model_name,
-                save=True
-            )
-            
-            # Plot threshold analysis for each feature
-            visualizer.plot_feature_threshold_analysis(
-                feature,
-                results,
-                save=True
-            )
-    
-    # Find best feature across all models
-    best_across_models = feature_evaluator.find_best_feature_across_models(
-        models_to_evaluate, 
-        metric='recall_class_0',
-        models_require_scaling=models_require_scaling
-    )
-    
-    # Print best feature results
-    result_printer.print_best_feature(best_across_models, metric='recall_class_0')
-    
-    # Highlight the best feature from all models with visualization
-    best_feature = best_across_models['feature']
-    best_model = best_across_models['model']
-    best_results = best_across_models['results']
-    
-    visualizer.plot_feature_roc_curve(
-        best_feature,
-        best_results['roc_data'],
-        model_name=f"BEST-{best_model}",
-        save=True
-    )
-    
-    visualizer.plot_feature_threshold_analysis(
-        f"BEST-{best_feature}",
-        best_results,
-        save=True
-    )
-    
+
     print("\nAnalysis complete. Results saved to log file and plots directory.")
     logger.info("\nAnalysis complete.")
     

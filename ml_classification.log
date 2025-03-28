@@ -11,59 +11,59 @@ Best model: Logistic Regression with score: 0.7778
 
 Logistic Regression Results (Failure Detection Focus):
 Accuracy: 0.7778
-Recall (Failure Class): 0.7778
-Precision (Failure Class): 0.2800
-F1 Score (Failure Class): 0.4118
+Recall (Failure Class): 1.0000
+Precision (Failure Class): 0.0769
+F1 Score (Failure Class): 0.1429
 Confusion Matrix: 
-[[ 7  2]
- [18 92]]
+[[  9   0]
+ [108   2]]
 Classification Report: 
               precision    recall  f1-score   support
 
-           0       0.28      0.78      0.41         9
-           1       0.98      0.84      0.90       110
+           0       0.08      1.00      0.14         9
+           1       1.00      0.02      0.04       110
 
-    accuracy                           0.83       119
-   macro avg       0.63      0.81      0.66       119
-weighted avg       0.93      0.83      0.86       119
+    accuracy                           0.09       119
+   macro avg       0.54      0.51      0.09       119
+weighted avg       0.93      0.09      0.04       119
 
 
 Random Forest Results (Failure Detection Focus):
 Accuracy: 0.4444
-Recall (Failure Class): 0.4444
-Precision (Failure Class): 0.5000
-F1 Score (Failure Class): 0.4706
+Recall (Failure Class): 1.0000
+Precision (Failure Class): 0.0763
+F1 Score (Failure Class): 0.1417
 Confusion Matrix: 
-[[  4   5]
- [  4 106]]
+[[  9   0]
+ [109   1]]
 Classification Report: 
               precision    recall  f1-score   support
 
-           0       0.50      0.44      0.47         9
-           1       0.95      0.96      0.96       110
+           0       0.08      1.00      0.14         9
+           1       1.00      0.01      0.02       110
 
-    accuracy                           0.92       119
-   macro avg       0.73      0.70      0.71       119
-weighted avg       0.92      0.92      0.92       119
+    accuracy                           0.08       119
+   macro avg       0.54      0.50      0.08       119
+weighted avg       0.93      0.08      0.03       119
 
 
 XGBoost Results (Failure Detection Focus):
 Accuracy: 0.3333
-Recall (Failure Class): 0.3333
-Precision (Failure Class): 0.7500
-F1 Score (Failure Class): 0.4615
+Recall (Failure Class): 1.0000
+Precision (Failure Class): 0.0763
+F1 Score (Failure Class): 0.1417
 Confusion Matrix: 
-[[  3   6]
- [  1 109]]
+[[  9   0]
+ [109   1]]
 Classification Report: 
               precision    recall  f1-score   support
 
-           0       0.75      0.33      0.46         9
-           1       0.95      0.99      0.97       110
+           0       0.08      1.00      0.14         9
+           1       1.00      0.01      0.02       110
 
-    accuracy                           0.94       119
-   macro avg       0.85      0.66      0.72       119
-weighted avg       0.93      0.94      0.93       119
+    accuracy                           0.08       119
+   macro avg       0.54      0.50      0.08       119
+weighted avg       0.93      0.08      0.03       119
 
 
 Random Forest Feature Importances:
@@ -81,6 +81,8 @@ XGBoost Feature Importances:
 3  ApertureIrregularityMetric    0.192372
 
 ==== THRESHOLD OPTIMIZATION ====
+Threshold 0.00: Recall 0.0000, Precision 0.0000, F1 0.0000
+Threshold 0.05: Recall 0.0000, Precision 0.0000, F1 0.0000
 Threshold 0.10: Recall 0.0000, Precision 0.0000, F1 0.0000
 Threshold 0.15: Recall 0.0000, Precision 0.0000, F1 0.0000
 Threshold 0.20: Recall 0.0000, Precision 0.0000, F1 0.0000
@@ -98,148 +100,64 @@ Threshold 0.75: Recall 0.6667, Precision 0.0545, F1 0.1008
 Threshold 0.80: Recall 0.7778, Precision 0.0625, F1 0.1157
 Threshold 0.85: Recall 0.8889, Precision 0.0696, F1 0.1290
 Threshold 0.90: Recall 1.0000, Precision 0.0769, F1 0.1429
+Threshold 0.95: Recall 1.0000, Precision 0.0763, F1 0.1417
 Best threshold for recall: 0.90 (recall = 1.0000)
-Saving models to models\20250313_163556...
+Saving models to models\20250313_170347...
 Saved Logistic Regression with optimized threshold: 0.9000
 Saved Random Forest with optimized threshold: 0.7000
 Saved XGBoost with optimized threshold: 0.8000
-Saved model metadata to models\20250313_163556\metadata.json
-
-==== INDIVIDUAL FEATURE EVALUATION ====
-
-==== FEATURE EVALUATION ACROSS MULTIPLE MODELS ====
-
---- Model: LogisticRegression ---
-
-PyComplexityMetric:
-  Accuracy: 0.6975
-  Recall (Failure Class): 0.2222
-  Precision (Failure Class): 0.0256
-  F1 (Failure Class): 0.0460
-  AUC: 0.7404
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.75 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.6005
-
-MeanAreaMetricEstimator:
-  Accuracy: 0.6387
-  Recall (Failure Class): 0.2222
-  Precision (Failure Class): 0.0282
-  F1 (Failure Class): 0.0500
-  AUC: 0.7343
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.80 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.6178
-
-AreaMetricEstimator:
-  Accuracy: 0.6218
-  Recall (Failure Class): 0.2222
-  Precision (Failure Class): 0.0290
-  F1 (Failure Class): 0.0513
-  AUC: 0.6980
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.70 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.6286
-
-ApertureIrregularityMetric:
-  Accuracy: 0.3697
-  Recall (Failure Class): 0.5556
-  Precision (Failure Class): 0.1111
-  F1 (Failure Class): 0.1852
-  AUC: 0.4444
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.60 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.4833
-
---- Model: RandomForestClassifier ---
-
-PyComplexityMetric:
-  Accuracy: 0.8655
-  Recall (Failure Class): 0.5556
-  Precision (Failure Class): 0.0481
-  F1 (Failure Class): 0.0885
-  AUC: 0.8010
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.90 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.2400
-
-MeanAreaMetricEstimator:
-  Accuracy: 0.8739
-  Recall (Failure Class): 0.5556
-  Precision (Failure Class): 0.0476
-  F1 (Failure Class): 0.0877
-  AUC: 0.7182
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.75 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.5900
-
-AreaMetricEstimator:
-  Accuracy: 0.8824
-  Recall (Failure Class): 0.5556
-  Precision (Failure Class): 0.0472
-  F1 (Failure Class): 0.0870
-  AUC: 0.8874
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.65 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.0179
-
-ApertureIrregularityMetric:
-  Accuracy: 0.8655
-  Recall (Failure Class): 0.5556
-  Precision (Failure Class): 0.0481
-  F1 (Failure Class): 0.0885
-  AUC: 0.6500
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.85 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.5900
-
---- Model: XGBClassifier ---
-
-PyComplexityMetric:
-  Accuracy: 0.9244
-  Recall (Failure Class): 0.8889
-  Precision (Failure Class): 0.0684
-  F1 (Failure Class): 0.1270
-  AUC: 0.8894
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.70 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.0527
-
-MeanAreaMetricEstimator:
-  Accuracy: 0.9160
-  Recall (Failure Class): 1.0000
-  Precision (Failure Class): 0.0763
-  F1 (Failure Class): 0.1417
-  AUC: 0.7359
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.45 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.0242
-
-AreaMetricEstimator:
-  Accuracy: 0.8824
-  Recall (Failure Class): 1.0000
-  Precision (Failure Class): 0.0789
-  F1 (Failure Class): 0.1463
-  AUC: 0.8051
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.30 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.0304
-
-ApertureIrregularityMetric:
-  Accuracy: 0.8992
-  Recall (Failure Class): 0.8889
-  Precision (Failure Class): 0.0702
-  F1 (Failure Class): 0.1301
-  AUC: 0.6318
-  Best threshold (F1): 0.50 (F1 = -1.0000)
-  Best threshold (Recall): 0.75 (Recall = 1.0000)
-  Optimal cutoff from ROC: 0.3226
-
-=== Best Feature for Failure Detection (recall_class_0) ===
-Feature: MeanAreaMetricEstimator
-Model: XGBClassifier
-Score: 1.0000
-For MeanAreaMetricEstimator, optimal cutoff: 0.0242
-Rule: When MeanAreaMetricEstimator >= 0.0242, likely to predict failure (Pass Rate < 95)
+Saved model metadata to models\20250313_170347\metadata.json
+Threshold 0.00: Recall 0.0000, Precision 0.0000, F1 0.0000
+Threshold 0.05: Recall 0.1111, Precision 0.0127, F1 0.0227
+Threshold 0.10: Recall 0.2222, Precision 0.0202, F1 0.0370
+Threshold 0.15: Recall 0.3333, Precision 0.0283, F1 0.0522
+Threshold 0.20: Recall 0.4444, Precision 0.0370, F1 0.0684
+Threshold 0.25: Recall 0.5556, Precision 0.0455, F1 0.0840
+Threshold 0.30: Recall 0.5556, Precision 0.0450, F1 0.0833
+Threshold 0.35: Recall 0.5556, Precision 0.0450, F1 0.0833
+Threshold 0.40: Recall 0.5556, Precision 0.0450, F1 0.0833
+Threshold 0.45: Recall 0.5556, Precision 0.0450, F1 0.0833
+Threshold 0.50: Recall 0.5556, Precision 0.0450, F1 0.0833
+Threshold 0.55: Recall 0.5556, Precision 0.0442, F1 0.0820
+Threshold 0.60: Recall 0.6667, Precision 0.0522, F1 0.0968
+Threshold 0.65: Recall 0.7778, Precision 0.0603, F1 0.1120
+Threshold 0.70: Recall 1.0000, Precision 0.0763, F1 0.1417
+Threshold 0.75: Recall 1.0000, Precision 0.0763, F1 0.1417
+Threshold 0.80: Recall 1.0000, Precision 0.0763, F1 0.1417
+Threshold 0.85: Recall 1.0000, Precision 0.0763, F1 0.1417
+Threshold 0.90: Recall 1.0000, Precision 0.0763, F1 0.1417
+Threshold 0.95: Recall 1.0000, Precision 0.0756, F1 0.1406
+Best threshold for recall: 0.70 (recall = 1.0000)
+Saving models to models\20250313_170348...
+Saved Logistic Regression with optimized threshold: 0.9000
+Saved Random Forest with optimized threshold: 0.7000
+Saved XGBoost with optimized threshold: 0.8000
+Saved model metadata to models\20250313_170348\metadata.json
+Threshold 0.00: Recall 0.0000, Precision 0.0000, F1 0.0000
+Threshold 0.05: Recall 0.5556, Precision 0.0442, F1 0.0820
+Threshold 0.10: Recall 0.5556, Precision 0.0439, F1 0.0813
+Threshold 0.15: Recall 0.5556, Precision 0.0439, F1 0.0813
+Threshold 0.20: Recall 0.5556, Precision 0.0439, F1 0.0813
+Threshold 0.25: Recall 0.5556, Precision 0.0439, F1 0.0813
+Threshold 0.30: Recall 0.5556, Precision 0.0439, F1 0.0813
+Threshold 0.35: Recall 0.5556, Precision 0.0439, F1 0.0813
+Threshold 0.40: Recall 0.5556, Precision 0.0439, F1 0.0813
+Threshold 0.45: Recall 0.6667, Precision 0.0522, F1 0.0968
+Threshold 0.50: Recall 0.6667, Precision 0.0522, F1 0.0968
+Threshold 0.55: Recall 0.6667, Precision 0.0522, F1 0.0968
+Threshold 0.60: Recall 0.6667, Precision 0.0522, F1 0.0968
+Threshold 0.65: Recall 0.7778, Precision 0.0603, F1 0.1120
+Threshold 0.70: Recall 0.8889, Precision 0.0684, F1 0.1270
+Threshold 0.75: Recall 0.8889, Precision 0.0684, F1 0.1270
+Threshold 0.80: Recall 1.0000, Precision 0.0763, F1 0.1417
+Threshold 0.85: Recall 1.0000, Precision 0.0763, F1 0.1417
+Threshold 0.90: Recall 1.0000, Precision 0.0763, F1 0.1417
+Threshold 0.95: Recall 1.0000, Precision 0.0763, F1 0.1417
+Best threshold for recall: 0.80 (recall = 1.0000)
+Saving models to models\20250313_170349...
+Saved Logistic Regression with optimized threshold: 0.9000
+Saved Random Forest with optimized threshold: 0.7000
+Saved XGBoost with optimized threshold: 0.8000
+Saved model metadata to models\20250313_170349\metadata.json
 
 Analysis complete.
