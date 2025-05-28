@@ -18,7 +18,7 @@ df[y_metrics + ['γ-index']] = df[y_metrics + ['γ-index']].astype(float)
 
 os.makedirs("plots", exist_ok=True)
 for metric in y_metrics:
-    sns.jointplot(data=df, x='γ-index', y=metric, kind='reg')
+    sns.jointplot(data=df, x='γ-index', y=metric, kind='reg', xlim=[87,101])
     plt.savefig(f"plots/d4_{metric}_vs_gamma.png", dpi=300)
     plt.close()
 
